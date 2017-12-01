@@ -1,9 +1,20 @@
-package parque.domain;
+package dominio;
+
+
+import dominio.repositorio.RepositorioVehiculo;
 
 public class Persona {
 	
 	private String nombre;
 	private String identificación;
+	private RepositorioVehiculo repositorioVehiculo;
+	
+	
+	public Persona (String nombre, String identificacion) {
+		this.nombre = nombre;
+		this.identificación = identificacion;
+		
+	}
 	public String getNombre() {
 		return nombre;
 	}

@@ -1,4 +1,4 @@
-package parque.domain;
+package dominio;
 
 public class Vehiculo {
 	
@@ -7,6 +7,16 @@ public class Vehiculo {
 	private String marca;
 	private String placa;
 	private Boolean estado;
+	
+	public Vehiculo(String tipo, String modelo, String marca, String placa, Boolean estado) {
+
+		this.tipo = tipo;
+		this.marca = marca;
+		this.modelo = modelo;
+		this.placa = placa;
+		this.estado = estado;
+	}
+	
 	public String getTipo() {
 		return tipo;
 	}
@@ -39,10 +49,4 @@ public class Vehiculo {
 	}
 	
 	
-	
-
-	
-
-	
-
 }

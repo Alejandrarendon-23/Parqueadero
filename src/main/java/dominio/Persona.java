@@ -6,13 +6,13 @@ import dominio.repositorio.RepositorioVehiculo;
 public class Persona {
 	
 	private String nombre;
-	private String identificación;
+	private String identificacion;
 	private RepositorioVehiculo repositorioVehiculo;
 	
 	
 	public Persona (String nombre, String identificacion) {
 		this.nombre = nombre;
-		this.identificación = identificacion;
+		this.identificacion = identificacion;
 		
 	}
 	public String getNombre() {
@@ -21,11 +21,11 @@ public class Persona {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	public String getIdentificación() {
-		return identificación;
+	public String getIdentificacion() {
+		return identificacion;
 	}
-	public void setIdentificación(String identificación) {
-		this.identificación = identificación;
+	public void setIdentificacion(String identificacion) {
+		this.identificacion = identificacion;
 	}
 	
 	

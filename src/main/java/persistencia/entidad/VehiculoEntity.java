@@ -22,12 +22,6 @@ public class VehiculoEntity {
 		private String placa;
 
 		@Column(nullable = false)
-		private String modelo;
-		
-		@Column(nullable = false)
-		private String marca;
-		
-		@Column(nullable = false)
 		private Boolean estado;
 
 		public Long getId() {
@@ -52,22 +46,6 @@ public class VehiculoEntity {
 
 		public void setTipo(String tipo) {
 			this.tipo = tipo;
-		}
-
-		public void setModelo(String modelo) {
-			this.modelo = modelo;
-		}
-
-		public String getModelo() {
-			return modelo;
-		}
-
-		public String getMarca() {
-			return marca;
-		}
-
-		public void setMarca(String marca) {
-			this.marca = marca;
 		}
 
 		public Boolean getEstado() {

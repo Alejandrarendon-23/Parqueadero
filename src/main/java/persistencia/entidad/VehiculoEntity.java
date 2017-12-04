@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.NamedQuery;
 
 @Entity(name = "Vehiculo")
-@NamedQuery(name = "Vehiculo.findByPlaca", query = "SELECT vehiculo FROM Vehiculo Vehiculo WHERE vehiculo.placa = :placa")
+@NamedQuery(name = "Vehiculo.findByPlaca", query = "SELECT vehiculo FROM Vehiculo vehiculo WHERE vehiculo.placa = :placa")
 public class VehiculoEntity {
 	
 		@Id
@@ -22,7 +22,7 @@ public class VehiculoEntity {
 		private String placa;
 
 		@Column(nullable = false)
-		private Boolean estado;
+		private boolean estado;
 
 		public Long getId() {
 			return id;
@@ -48,11 +48,11 @@ public class VehiculoEntity {
 			this.tipo = tipo;
 		}
 
-		public Boolean getEstado() {
+		public boolean getEstado() {
 			return estado;
 		}
 
-		public void setEstado(Boolean estado) {
+		public void setEstado(boolean estado) {
 			this.estado = estado;
 		}
 		

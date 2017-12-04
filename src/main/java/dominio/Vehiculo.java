@@ -4,9 +4,9 @@ public class Vehiculo {
 	
 	private String tipo;
 	private String placa;
-	private Boolean estado;
+	private boolean estado;
 	
-	public Vehiculo(String tipo, String placa, Boolean estado) {
+	public Vehiculo(String tipo, String placa, boolean estado) {
 
 		this.tipo = tipo;
 		this.placa = placa;
@@ -26,10 +26,10 @@ public class Vehiculo {
 	public void setPlaca(String placa) {
 		this.placa = placa;
 	}
-	public Boolean getEstado() {
+	public boolean getEstado() {
 		return estado;
 	}
-	public void setEstado(Boolean estado) {
+	public void setEstado(boolean estado) {
 		this.estado = estado;
 	}
 	

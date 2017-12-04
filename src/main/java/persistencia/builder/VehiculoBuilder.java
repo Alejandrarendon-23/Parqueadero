@@ -18,6 +18,7 @@ public class VehiculoBuilder {
 	
 	public static VehiculoEntity convertirAEntity(Vehiculo vehiculo) {
 		VehiculoEntity vehiculoEntity = new VehiculoEntity();
+		vehiculoEntity.setEstado(vehiculo.getEstado());
 		vehiculoEntity.setTipo(vehiculo.getTipo());
 		vehiculoEntity.setPlaca(vehiculo.getPlaca());
 		

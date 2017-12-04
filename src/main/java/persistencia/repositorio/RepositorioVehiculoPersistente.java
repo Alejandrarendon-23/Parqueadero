@@ -12,7 +12,7 @@ import persistencia.repositorio.jpa.RepositorioVehiculoJPA;
 
 
 public class RepositorioVehiculoPersistente implements RepositorioVehiculo, RepositorioVehiculoJPA{
-	private static final String PLACA = "ASS94D";
+	
 	private static final String VEHICULO_FIND_BY_PLACA = "Vehiculo.findByPlaca";
 	
 	private EntityManager entityManager;
@@ -40,7 +40,7 @@ public class RepositorioVehiculoPersistente implements RepositorioVehiculo, Repo
 	public VehiculoEntity obtenerVehiculoEntityPorPlaca(String placa) {
 		
 		Query query = entityManager.createNamedQuery(VEHICULO_FIND_BY_PLACA);
-		query.setParameter(PLACA, placa);
+		query.setParameter("placa", placa);
 
 		return (VehiculoEntity) query.getSingleResult();
 	}

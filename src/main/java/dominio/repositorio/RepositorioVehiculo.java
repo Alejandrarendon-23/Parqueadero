@@ -16,4 +16,5 @@ public interface RepositorioVehiculo {
 	 * @param vehiculo
 	 */
 	void agregar(Vehiculo vehiculo);
+	void actualizarVehiculo(Vehiculo vehiculo);
 }

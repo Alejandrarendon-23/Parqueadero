@@ -2,17 +2,16 @@ package dominio;
 
 import java.util.Date;
 
+
 public class Factura {
 	
 	private Vehiculo vehiculo;
-	private  Date HoraIngreso;
-	private Date HoraSalida;
 	private int precio;
+	private Date HoraIngreso;
+	private Date HoraSalida;
+	
 	public Vehiculo getVehiculo() {
 		return vehiculo;
-	}
-	public void setVehiculo(Vehiculo vehiculo) {
-		this.vehiculo = vehiculo;
 	}
 	public Date getHoraIngreso() {
 		return HoraIngreso;
@@ -26,6 +25,10 @@ public class Factura {
 	public void setHoraSalida(Date horaSalida) {
 		HoraSalida = horaSalida;
 	}
+	public void setVehiculo(Vehiculo vehiculo) {
+		this.vehiculo = vehiculo;
+	}
+	
 	public int getPrecio() {
 		return precio;
 	}
@@ -35,8 +38,8 @@ public class Factura {
 	public Factura(Vehiculo vehiculo, Date horaIngreso, Date horaSalida, int precio) {
 		super();
 		this.vehiculo = vehiculo;
-		HoraIngreso = horaIngreso;
-		HoraSalida = horaSalida;
+		this.HoraIngreso = horaIngreso;
+		this.HoraSalida = horaSalida;
 		this.precio = precio;
 	}
 	

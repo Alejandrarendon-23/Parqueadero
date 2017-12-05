@@ -23,6 +23,8 @@ public class VehiculoEntity {
 
 		@Column(nullable = false)
 		private boolean estado;
+		
+		
 
 		public Long getId() {
 			return id;

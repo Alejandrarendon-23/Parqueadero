@@ -5,13 +5,16 @@ public class Vehiculo {
 	private String tipo;
 	private String placa;
 	private boolean estado;
+
 	
 	public Vehiculo(String tipo, String placa, boolean estado) {
 
 		this.tipo = tipo;
 		this.placa = placa;
 		this.estado = estado;
+		
 	}
+	
 	
 	public String getTipo() {
 		return tipo;

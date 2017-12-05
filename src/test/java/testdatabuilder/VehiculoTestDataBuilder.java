@@ -4,7 +4,7 @@ import dominio.Vehiculo;
 
 public class VehiculoTestDataBuilder {
 	
-	private static final boolean ESTADO = false;
+	private static final boolean ESTADO = true;
 	private static final String TIPO = "carro";
 	private static final String PLACA = "FBW234";
 	

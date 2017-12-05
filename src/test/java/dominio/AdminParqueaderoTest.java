@@ -1,16 +1,18 @@
 package dominio;
 
-import org.junit.Test;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.After;
 import org.junit.Before;
-import dominio.Vehiculo;
-import dominio.Vigilante;
+import org.junit.Test;
+
+
 import dominio.repositorio.RepositorioVehiculo;
 import persistencia.sistema.SistemaPersistencia;
+import servicio.AdminParqueaderoServicio;
+import servicio.AdminParqueaderoServicioImpl;
 
-public class VigilanteTest {
+public class AdminParqueaderoTest {
 	
 	private SistemaPersistencia sistemaPersistencia;
 	
@@ -23,17 +25,12 @@ public class VigilanteTest {
 		
 		repositoriovehiculo = sistemaPersistencia.obtenerRepositorioVehiculo();
 		
-		sistemaPersistencia.iniciar();
+		
 	}
-	@After
-	public void tearDown() {
-		sistemaPersistencia.terminar();
-	}
-	
 	@Test
 	public void ingresarCarroTest() {
 		Vehiculo carro = new Carro("carro", "FBW234", false);
-		Vigilante vigilante = new Vigilante(repositoriovehiculo);
+		AdminParqueaderoServicio vigilante = new AdminParqueaderoServicioImpl();
 		vigilante.ingresarVehiculo(carro);
 		
 		assertEquals("FBW234", repositoriovehiculo.obtenerPorPlaca("FBW234").getPlaca());
@@ -43,7 +40,7 @@ public class VigilanteTest {
 	@Test
 	public void ingresarMotoTest() {
 		Vehiculo moto = new Moto("moto", "FBW23D", false, 1000);
-		Vigilante vigilante = new Vigilante(repositoriovehiculo);
+		AdminParqueaderoServicio vigilante = new AdminParqueaderoServicioImpl();
 		vigilante.ingresarVehiculo(moto);
 		
 		assertEquals("FBW23D", repositoriovehiculo.obtenerPorPlaca("FBW23D").getPlaca());

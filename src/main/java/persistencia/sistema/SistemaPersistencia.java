@@ -17,12 +17,6 @@ public class SistemaPersistencia {
 	public RepositorioVehiculo obtenerRepositorioVehiculo() {
 		return new RepositorioVehiculoPersistente(entityManager);
 	}
-	public void iniciar() {
-		entityManager.getTransaction().begin();
-	}
-
-	public void terminar() {
-		entityManager.getTransaction().commit();
-	}
+	
 
 }

@@ -4,7 +4,9 @@ public class Moto extends Vehiculo {
 	
 	private int cilindraje;
 
+	public Moto() {
 	
+	}
 	public Moto(String tipo, String placa, boolean estado, int cilindraje) {
 		super(tipo, placa, estado);
 		this.cilindraje = cilindraje;

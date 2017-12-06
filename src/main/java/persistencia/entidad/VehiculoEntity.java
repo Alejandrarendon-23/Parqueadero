@@ -10,53 +10,50 @@ import javax.persistence.NamedQuery;
 @Entity(name = "Vehiculo")
 @NamedQuery(name = "Vehiculo.findByPlaca", query = "SELECT vehiculo FROM Vehiculo vehiculo WHERE vehiculo.placa = :placa")
 public class VehiculoEntity {
-	
-		@Id
-		@GeneratedValue(strategy = GenerationType.AUTO)
-		private Long id;
 
-		@Column(nullable = false)
-		private String tipo;
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long id;
 
-		@Column(nullable = false)
-		private String placa;
+	@Column(nullable = false)
+	private String tipo;
 
-		@Column(nullable = false)
-		private boolean estado;
-		
-		
+	@Column(nullable = false)
+	private String placa;
 
-		public Long getId() {
-			return id;
-		}
+	@Column(nullable = false)
+	private boolean estado;
 
-		public void setId(Long id) {
-			this.id = id;
-		}
+	public Long getId() {
+		return id;
+	}
 
-		public String getPlaca() {
-			return placa;
-		}
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-		public void setPlaca(String placa) {
-			this.placa = placa;
-		}
+	public String getPlaca() {
+		return placa;
+	}
 
-		public String getTipo() {
-			return tipo;
-		}
+	public void setPlaca(String placa) {
+		this.placa = placa;
+	}
 
-		public void setTipo(String tipo) {
-			this.tipo = tipo;
-		}
+	public String getTipo() {
+		return tipo;
+	}
 
-		public boolean getEstado() {
-			return estado;
-		}
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
 
-		public void setEstado(boolean estado) {
-			this.estado = estado;
-		}
-		
+	public boolean getEstado() {
+		return estado;
+	}
+
+	public void setEstado(boolean estado) {
+		this.estado = estado;
+	}
 
 }

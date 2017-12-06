@@ -3,9 +3,12 @@ package servicio;
 import java.util.Calendar;
 import java.util.List;
 
+import javax.ws.rs.GET;
+
 import dominio.Vehiculo;
 import dominio.repositorio.RepositorioVehiculo;
 import persistencia.sistema.SistemaPersistencia;
+import dominio.CeldaParqueo;
 
 public class AdminParqueaderoServicioImpl implements AdminParqueaderoServicio {
 	
@@ -17,6 +20,7 @@ public class AdminParqueaderoServicioImpl implements AdminParqueaderoServicio {
 	private static final float VALOR_DIA_MOTO = 8000;
 	private static final int MAX_CILINDRAJE = 500;
 	private RepositorioVehiculo repositoriovehiculo;
+	private Vehiculo vehiculo;
 	
 	public AdminParqueaderoServicioImpl() {
 		SistemaPersistencia sistemapersistencia = new SistemaPersistencia();
@@ -39,7 +43,18 @@ public class AdminParqueaderoServicioImpl implements AdminParqueaderoServicio {
 	}
 	
 	@Override
-	public int calcularPrecioTotal() {
+	public int calcularValorTotalPorTiempo(CeldaParqueo celda) {
+		Calendar fechaIngreso = celda.getHoraIngreso();
+		Calendar fechaSalida = celda.getHoraSalida();
+		long fechaDiferencia =  (fechaSalida.getTimeInMillis() - fechaIngreso.getTimeInMillis());
+		
+		int numHoras = (int) (fechaDiferencia/(1000*60*60));
+		
+		
+		
+		
+
+	
 		
 		return 0;
 	}
@@ -62,24 +77,7 @@ public class AdminParqueaderoServicioImpl implements AdminParqueaderoServicio {
     	repositoriovehiculo.actualizarVehiculo(vehiculo);
     }
 
-	@Override
-	public boolean valorPorHora(String tipo, boolean estado) {
-		Calendar now = Calendar.getInstance();
-		if (estado == false && tipo == "carro" && now.get(Calendar.HOUR_OF_DAY) < 9) {
-		return true;
-	} 
-	return false;
-		
-	}
 
-	@Override
-	public boolean valorPorDia(String tipo, boolean estado) {
-		Calendar now = Calendar.getInstance();
-		if (estado == false && tipo == "carro" && now.get(Calendar.HOUR_OF_DAY) > 9) {
-		return true;
-	} 		
-		return false;
-	}
 
 
 	

@@ -47,4 +47,17 @@ public class AdminParqueaderoTest {
 		//assertNotNull(moto);
 		
 	}
+	/*@Test
+	public void calcularValorTotalPorTiempoTest(CeldaParqueo celda) {
+		Vehiculo carro = new Carro("carro", "FBW234", false);
+		Vehiculo moto = new Moto("moto", "FBW23D", false, 1000);
+		AdminParqueaderoServicio valor = new AdminParqueaderoServicioImpl();
+		valor.calcularValorTotalPorTiempo(celda);
+		
+		assertEquals(8000, );*/
+		
+		
+
+
+	
 }

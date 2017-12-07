@@ -11,13 +11,8 @@ public interface AdminParqueaderoServicio {
 	public  boolean esPermitidoIngresoPorPlaca(String placa);
 	public  boolean esMayorAlCilindrajePermitido(int cilindraje);
 	public  int calcularValorTotalPorTiempo(CeldaParqueo celda);
-	public void ingresarVehiculo(Vehiculo vehiculo);
-	
-	
-	 
-	
-		
-		
-	
-
+	public String ingresarVehiculo(Vehiculo vehiculo);
+	public int precioTotalPorVehiculo(CeldaParqueo celda);
+	public int obtenerCantidadCarros();
+	public int obtenerCantidadMotos();
 }

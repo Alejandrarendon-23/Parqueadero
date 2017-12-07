@@ -1,5 +1,8 @@
 package persistencia.repositorio;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
@@ -13,6 +16,7 @@ import persistencia.entidad.VehiculoEntity;
 public class RepositorioVehiculoPersistente implements RepositorioVehiculo{
 	
 	private static final String VEHICULO_FIND_BY_PLACA = "Vehiculo.findByPlaca";
+	private static final String VEHICULO_FIND_ALL = "Vehiculo.findAll";
 	
 	private EntityManager entityManager;
 
@@ -51,6 +55,15 @@ public class RepositorioVehiculoPersistente implements RepositorioVehiculo{
 		entityManager.merge(vehiculoEntity);
 		entityManager.getTransaction().commit();
 		
+	}
+
+	@Override
+	public List<Vehiculo> listarvehiculos() {
+		List<Vehiculo> listaVehiculos = new ArrayList<>();
+		Query query = entityManager.createNamedQuery(VEHICULO_FIND_ALL);
+		listaVehiculos = query.getResultList();
+		
+		return listaVehiculos;
 	}
 
 

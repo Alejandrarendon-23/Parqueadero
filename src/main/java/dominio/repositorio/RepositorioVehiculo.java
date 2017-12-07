@@ -1,5 +1,7 @@
 package dominio.repositorio;
 
+import java.util.List;
+
 import dominio.Vehiculo;
 
 public interface RepositorioVehiculo {
@@ -17,4 +19,5 @@ public interface RepositorioVehiculo {
 	 */
 	void agregar(Vehiculo vehiculo);
 	void actualizarVehiculo(Vehiculo vehiculo);
+	List<Vehiculo> listarvehiculos();
 }

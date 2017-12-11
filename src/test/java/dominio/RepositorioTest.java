@@ -8,6 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import dominio.repositorio.RepositorioVehiculo;
+import persistencia.entidad.VehiculoEntity;
 import persistencia.sistema.SistemaPersistencia;
 import testdatabuilder.VehiculoTestDataBuilder;
 
@@ -67,7 +68,7 @@ public class RepositorioTest {
 		repositorioVehiculo.agregar(vehiculo);
 		repositorioVehiculo.agregar(vehiculo2);
 	
-		List<Vehiculo> listaVehiculos = repositorioVehiculo.listarvehiculos();
+		List<VehiculoEntity> listaVehiculos = repositorioVehiculo.listarvehiculos();
 		//listaVehiculos = repositorioVehiculo.listarvehiculos();
 		assertEquals(2, listaVehiculos.size());
 	}

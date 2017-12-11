@@ -3,13 +3,16 @@ package servicio;
 import java.util.Calendar;
 import java.util.List;
 
-import dominio.Carro;
+import org.springframework.stereotype.Component;
+
 import dominio.CeldaParqueo;
 import dominio.Moto;
 import dominio.Vehiculo;
 import dominio.repositorio.RepositorioVehiculo;
+import persistencia.entidad.VehiculoEntity;
 import persistencia.sistema.SistemaPersistencia;
 
+@Component
 public class AdminParqueaderoServicioImpl implements AdminParqueaderoServicio {
 
 	private static final int MAX_CARROS = 20;
@@ -27,7 +30,7 @@ public class AdminParqueaderoServicioImpl implements AdminParqueaderoServicio {
 	}
 
 	@Override
-	public List<Vehiculo> listarVehiculos() {
+	public List<VehiculoEntity> listarVehiculos() {
 		return repositoriovehiculo.listarvehiculos();
 
 	}
@@ -90,22 +93,32 @@ public class AdminParqueaderoServicioImpl implements AdminParqueaderoServicio {
 	}
 
 	public String ingresarVehiculo(Vehiculo vehiculo) {
-		if (vehiculo.getTipo().equals("carro") && esPermitidoIngresoPorPlaca((vehiculo.getPlaca()))
-				&& obtenerCantidadCarros() <= MAX_CARROS) {
+		String mensaje = "No se permite su ingreso al parqueadero";
+		if (vehiculo.getTipo().equals("carro") && esPermitidoIngresoPorPlaca((vehiculo.getPlaca())) == true
+				&& obtenerCantidadCarros() <= MAX_CARROS && vehiculo.getEstado() == false) {
 
 			repositoriovehiculo.agregar(vehiculo);
-			
-		} else if (vehiculo.getTipo().equals("moto") && esPermitidoIngresoPorPlaca((vehiculo.getPlaca()))
-				&& obtenerCantidadCarros() <= MAX_MOTOS) {
+			mensaje = ("Está autorizado para ingresar al parqueadero");
+
+		} else if (vehiculo.getTipo().equals("moto") && esPermitidoIngresoPorPlaca((vehiculo.getPlaca())) == true
+				&& obtenerCantidadMotos() <= MAX_MOTOS && vehiculo.getEstado() == false) {
 
 			repositoriovehiculo.agregar(vehiculo);
+			mensaje = ("Está autorizado para ingresar al parqueadero");
 		}
-		return "No se permite su ingreso al parqueadero";
+		return mensaje;
 	}
 
-	public void retirarVehiculo(Vehiculo vehiculo) {
+	@Override
+	public String retirarVehiculo(Vehiculo vehiculo) {
+		String mensaje = "No es posible retirar el vehiculo";
+		if(vehiculo.getEstado()== true) {
 
 		repositoriovehiculo.actualizarVehiculo(vehiculo);
+		mensaje = "retiro exitoso";
+		}
+		return mensaje;
+		
 	}
 
 	@Override
@@ -122,9 +135,9 @@ public class AdminParqueaderoServicioImpl implements AdminParqueaderoServicio {
 
 	@Override
 	public int obtenerCantidadCarros() {
-		List<Vehiculo> vehiculosAValidar = listarVehiculos();
+		List<VehiculoEntity> vehiculosAValidar = listarVehiculos();
 		int contadorCarros = 0;
-		for (Vehiculo vehiculo : vehiculosAValidar) {
+		for (VehiculoEntity vehiculo : vehiculosAValidar) {
 			if (vehiculo.getTipo().equals("carro")) {
 				contadorCarros += 1;
 
@@ -136,9 +149,9 @@ public class AdminParqueaderoServicioImpl implements AdminParqueaderoServicio {
 
 	@Override
 	public int obtenerCantidadMotos() {
-		List<Vehiculo> vehiculosAValidar = listarVehiculos();
+		List<VehiculoEntity> vehiculosAValidar = listarVehiculos();
 		int contadorMotos = 0;
-		for (Vehiculo vehiculo : vehiculosAValidar) {
+		for (VehiculoEntity vehiculo : vehiculosAValidar) {
 			if (vehiculo.getTipo().equals("moto")) {
 				contadorMotos += 1;
 

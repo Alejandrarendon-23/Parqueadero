@@ -40,6 +40,7 @@ public class RepositorioVehiculoPersistente implements RepositorioVehiculo{
 		entityManager.getTransaction().begin();
 		entityManager.persist(VehiculoBuilder.convertirAEntity(vehiculo));
 		entityManager.getTransaction().commit();
+		
 
 	}
 
@@ -58,8 +59,8 @@ public class RepositorioVehiculoPersistente implements RepositorioVehiculo{
 	}
 
 	@Override
-	public List<Vehiculo> listarvehiculos() {
-		List<Vehiculo> listaVehiculos = new ArrayList<>();
+	public List<VehiculoEntity> listarvehiculos() {
+		List<VehiculoEntity> listaVehiculos = new ArrayList<>();
 		Query query = entityManager.createNamedQuery(VEHICULO_FIND_ALL);
 		listaVehiculos = query.getResultList();
 		

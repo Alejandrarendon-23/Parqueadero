@@ -17,4 +17,5 @@ public interface AdminParqueaderoServicio {
 	public int obtenerCantidadCarros();
 	public int obtenerCantidadMotos();
 	public String retirarVehiculo(Vehiculo vehiculo);
+	public int cobroTotalPorVehiculo(CeldaParqueo celda);
 }

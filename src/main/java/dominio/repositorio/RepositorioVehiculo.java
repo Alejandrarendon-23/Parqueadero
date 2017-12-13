@@ -9,16 +9,21 @@ public interface RepositorioVehiculo {
 
 	/**
 	 * Permite obtener un vehiculo por placa
+	 * 
 	 * @param placa
 	 * @return
 	 */
-	Vehiculo obtenerPorPlaca(String placa);
+	VehiculoEntity obtenerPorPlaca(String placa);
 
 	/**
 	 * Permite agregar un vehiculo al repositorio
+	 * 
 	 * @param vehiculo
 	 */
-	void agregar(Vehiculo vehiculo);
-	void actualizarVehiculo(Vehiculo vehiculo);
+
+	void agregar(VehiculoEntity vehiculo);
+
+	void actualizarVehiculo(VehiculoEntity vehiculo);
+
 	List<VehiculoEntity> listarvehiculos();
 }

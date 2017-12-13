@@ -6,6 +6,7 @@
     <persistence-unit name="parqueadero-pu-test" transaction-type="RESOURCE_LOCAL">
 
         <class>persistencia.entidad.VehiculoEntity</class>
+        <class>persistencia.entidad.CeldaEntity</class>
         
 
         <properties>

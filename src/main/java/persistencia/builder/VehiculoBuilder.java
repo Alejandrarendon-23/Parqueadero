@@ -22,7 +22,9 @@ public class VehiculoBuilder {
 		vehiculoEntity.setTipo(vehiculo.getTipo());
 		vehiculoEntity.setPlaca(vehiculo.getPlaca());
 		
+		
 		return vehiculoEntity;
 	}
+	
 
 }

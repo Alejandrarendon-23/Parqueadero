@@ -23,6 +23,7 @@ public class RepositorioTest {
 
 	private SistemaPersistencia sistemaPersistencia;
 	Calendar fechaIngreso;
+	Calendar fechaIngreso2;
 	Calendar fechaSalida;
 
 	@Before
@@ -80,6 +81,22 @@ public class RepositorioTest {
 		// listaVehiculos = repositorioVehiculo.listarvehiculos();
 		assertEquals(2, listaVehiculos.size());
 	}
+//	@Test
+//	public void listarCeldaTest() {
+//		fechaIngreso = Calendar.getInstance();
+//		fechaIngreso2 = Calendar.getInstance();
+//		fechaIngreso2.add(Calendar.HOUR, 3);
+//		RepositorioCelda repositorioCelda = sistemaPersistencia.obtenerRepositorioCelda();
+//		CeldaParqueoTestDataBuilder celdaDataBuilder = new CeldaParqueoTestDataBuilder();
+//		CeldaParqueo celda = celdaDataBuilder.conFechaIngreso(fechaIngreso).build();
+//		CeldaParqueo celda2 = celdaDataBuilder.conFechaIngreso(fechaIngreso2).build();
+//
+//		repositorioCelda.agregarCelda(CeldaBuilder.convertirAEntity(celda));
+//		repositorioCelda.agregarCelda(CeldaBuilder.convertirAEntity(celda2));
+//
+//		List<CeldaEntity> listaCeldas = repositorioCelda.listarcelda();
+//		assertEquals(2, listaCeldas.size());
+//	}
 
 	@Test
 	public void agregarCeldaTest() {

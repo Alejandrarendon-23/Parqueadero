@@ -2,13 +2,15 @@ package servicio;
 
 import java.util.List;
 
-import dominio.Vehiculo;
-import persistencia.entidad.VehiculoEntity;
 import dominio.CeldaParqueo;
+import dominio.Vehiculo;
+import persistencia.entidad.CeldaEntity;
+import persistencia.entidad.VehiculoEntity;
 
 public interface AdminParqueaderoServicio {
 	
 	public  List<VehiculoEntity> listarVehiculos();
+	public  List<CeldaEntity> listarCeldas();
 	public  boolean esPermitidoIngresoPorPlaca(String placa);
 	public  boolean esMayorAlCilindrajePermitido(int cilindraje);
 	public  int calcularValorTotalPorTiempo(CeldaParqueo celda);

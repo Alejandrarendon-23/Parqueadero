@@ -48,15 +48,24 @@ public class VehiculoController {
 	}
 
 	@RequestMapping("/costo")
-	public Response ingresar(@RequestParam(value = "placa", required = true) String placa,
+	public Response costo(@RequestParam(value = "placa", required = true) String placa,
 			@RequestParam(value = "tipo", required = true) String tipo,
 			@RequestParam(value = "cilindraje", required = false, defaultValue = "0") int cilindraje) {
 		RepositorioCelda repositorioCelda = sistemaPersistencia.obtenerRepositorioCelda();
 		CeldaParqueo celda = repositorioCelda.obtenerPorCeldaPlaca(placa);
 		celda.setHoraSalida(Calendar.getInstance());
 		
-		String output = "El Valor Es: " + vehiculoService.cobroTotalPorVehiculo(celda) + " $";
+		String output = "El valor total a pagar es: " + vehiculoService.cobroTotalPorVehiculo(celda) + " $";
 		return Response.status(200).entity(output).build();
+	}
+	@RequestMapping("/listar")
+	public Response listar(@RequestParam(value = "placa", required = true) String placa,
+			@RequestParam(value = "tipo", required = true) String tipo,
+			@RequestParam(value = "cilindraje", required = false, defaultValue = "0") int cilindraje) {
+		
+		
+		return Response.status(200).entity(vehiculoService.listarCeldas()).build();
+		
 	}
 
 }

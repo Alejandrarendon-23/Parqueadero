@@ -8,11 +8,15 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 
 @Entity(name = "Celda")
-@NamedQuery(name = "Celda.findByPlaca", query = "SELECT celda FROM Celda celda WHERE celda.vehiculo.placa = :placa")
+@NamedQueries({
+@NamedQuery(name = "Celda.findByPlaca", query = "SELECT celda FROM Celda celda WHERE celda.vehiculo.placa = :placa"),
+@NamedQuery(name = "Celda.findAll", query=("SELECT celda FROM Celda celda"))
+})
 public class CeldaEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

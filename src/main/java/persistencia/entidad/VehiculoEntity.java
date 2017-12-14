@@ -27,6 +27,17 @@ public class VehiculoEntity {
 
 	@Column(nullable = false)
 	private boolean estado;
+	
+	@Column
+	private int cilindraje;
+
+	public int getCilindraje() {
+		return cilindraje;
+	}
+
+	public void setCilindraje(int cilindraje) {
+		this.cilindraje = cilindraje;
+	}
 
 	public Long getId() {
 		return id;

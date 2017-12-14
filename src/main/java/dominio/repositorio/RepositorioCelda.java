@@ -1,6 +1,9 @@
 package dominio.repositorio;
+import java.util.List;
+
 import dominio.CeldaParqueo;
 import persistencia.entidad.CeldaEntity;
+import persistencia.entidad.VehiculoEntity;
 
 public interface RepositorioCelda {
 	
@@ -18,5 +21,7 @@ public interface RepositorioCelda {
 	 */
 
 	void agregarCelda(CeldaEntity celda);
+
+	List<CeldaEntity> listarcelda();
 
 }

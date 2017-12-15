@@ -41,11 +41,11 @@ public class RepositorioCeldaPersistente implements RepositorioCelda {
 	}
 	@Override
 	public List<CeldaEntity> listarcelda() {
-		List<CeldaEntity> listaVehiculos = new ArrayList<>();
+		List<CeldaEntity> listaCelda = new ArrayList<>();
 		Query query = entityManager.createNamedQuery(CELDA_FIND_ALL);
-		listaVehiculos = query.getResultList();
+		listaCelda = query.getResultList();
 
-		return listaVehiculos;
+		return listaCelda;
 	}
 
 }

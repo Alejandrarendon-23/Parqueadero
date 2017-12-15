@@ -23,7 +23,6 @@ public class RepositorioTest {
 
 	private SistemaPersistencia sistemaPersistencia;
 	Calendar fechaIngreso;
-	Calendar fechaIngreso2;
 	Calendar fechaSalida;
 
 	@Before
@@ -81,22 +80,37 @@ public class RepositorioTest {
 		// listaVehiculos = repositorioVehiculo.listarvehiculos();
 		assertEquals(2, listaVehiculos.size());
 	}
-//	@Test
-//	public void listarCeldaTest() {
-//		fechaIngreso = Calendar.getInstance();
-//		fechaIngreso2 = Calendar.getInstance();
-//		fechaIngreso2.add(Calendar.HOUR, 3);
-//		RepositorioCelda repositorioCelda = sistemaPersistencia.obtenerRepositorioCelda();
-//		CeldaParqueoTestDataBuilder celdaDataBuilder = new CeldaParqueoTestDataBuilder();
-//		CeldaParqueo celda = celdaDataBuilder.conFechaIngreso(fechaIngreso).build();
-//		CeldaParqueo celda2 = celdaDataBuilder.conFechaIngreso(fechaIngreso2).build();
-//
-//		repositorioCelda.agregarCelda(CeldaBuilder.convertirAEntity(celda));
-//		repositorioCelda.agregarCelda(CeldaBuilder.convertirAEntity(celda2));
-//
-//		List<CeldaEntity> listaCeldas = repositorioCelda.listarcelda();
-//		assertEquals(2, listaCeldas.size());
-//	}
+	@Test
+	public void listarCeldaTest() {
+		Vehiculo vehiculo = new Vehiculo("carro","AWS237", true);
+		Vehiculo vehiculo2 = new Vehiculo("carro","KWS235", true);
+		fechaIngreso = Calendar.getInstance();
+		
+		RepositorioVehiculo repositorioVehiculo = sistemaPersistencia.obtenerRepositorioVehiculo();
+		repositorioVehiculo.agregar(VehiculoBuilder.convertirAEntity(vehiculo));
+		repositorioVehiculo.agregar(VehiculoBuilder.convertirAEntity(vehiculo2));
+
+		VehiculoEntity vehiculoEntity = repositorioVehiculo.obtenerPorPlaca("AWS237");
+		VehiculoEntity vehiculoEntity2 = repositorioVehiculo.obtenerPorPlaca("KWS235");
+
+		RepositorioCelda repositorioCelda = sistemaPersistencia.obtenerRepositorioCelda();
+		CeldaParqueoTestDataBuilder celdaDataBuilder = new CeldaParqueoTestDataBuilder();
+		CeldaParqueo celda = celdaDataBuilder.conFechaIngreso(fechaIngreso).build();
+		CeldaParqueo celda2 = celdaDataBuilder.conFechaIngreso(fechaIngreso).build();
+		CeldaEntity celdaEntity = CeldaBuilder.convertirAEntity(celda);
+		CeldaEntity celdaEntity2 = CeldaBuilder.convertirAEntity(celda2);
+
+		celdaEntity.setVehiculo(vehiculoEntity);
+		celdaEntity2.setVehiculo(vehiculoEntity2);
+
+
+		repositorioCelda.agregarCelda(celdaEntity);
+		repositorioCelda.agregarCelda(celdaEntity2);
+
+
+		List<CeldaEntity> listaCeldas = repositorioCelda.listarcelda();
+		assertEquals(2, listaCeldas.size());
+	}
 
 	@Test
 	public void agregarCeldaTest() {

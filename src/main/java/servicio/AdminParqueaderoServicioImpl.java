@@ -10,12 +10,10 @@ import dominio.Moto;
 import dominio.Vehiculo;
 import dominio.repositorio.RepositorioCelda;
 import dominio.repositorio.RepositorioVehiculo;
-import persistencia.builder.CeldaBuilder;
 import persistencia.builder.VehiculoBuilder;
 import persistencia.entidad.CeldaEntity;
 import persistencia.entidad.VehiculoEntity;
 import persistencia.sistema.SistemaPersistencia;
-import testdatabuilder.CeldaParqueoTestDataBuilder;
 
 @Component
 public class AdminParqueaderoServicioImpl implements AdminParqueaderoServicio {

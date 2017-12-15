@@ -3,7 +3,6 @@ import java.util.List;
 
 import dominio.CeldaParqueo;
 import persistencia.entidad.CeldaEntity;
-import persistencia.entidad.VehiculoEntity;
 
 public interface RepositorioCelda {
 	

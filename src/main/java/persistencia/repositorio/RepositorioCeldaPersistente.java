@@ -10,7 +10,6 @@ import dominio.CeldaParqueo;
 import dominio.repositorio.RepositorioCelda;
 import persistencia.builder.CeldaBuilder;
 import persistencia.entidad.CeldaEntity;
-import persistencia.entidad.VehiculoEntity;
 
 public class RepositorioCeldaPersistente implements RepositorioCelda {
 

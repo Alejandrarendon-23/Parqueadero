@@ -2,8 +2,7 @@ package dominio;
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
-import dominio.Moto;
-import dominio.Vehiculo;
+
 import testdatabuilder.MotoTestDataBuilder;
 public class MotoTest {
 	

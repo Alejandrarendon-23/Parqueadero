@@ -2,7 +2,6 @@ package dominio.repositorio;
 
 import java.util.List;
 
-import dominio.Vehiculo;
 import persistencia.entidad.VehiculoEntity;
 
 public interface RepositorioVehiculo {

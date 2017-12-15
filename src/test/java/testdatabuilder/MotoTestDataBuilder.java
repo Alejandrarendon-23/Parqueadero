@@ -1,7 +1,6 @@
 package testdatabuilder;
 
 import dominio.Moto;
-import dominio.Vehiculo;
 
 public class MotoTestDataBuilder {
 	

@@ -6,9 +6,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
-import dominio.Vehiculo;
 import dominio.repositorio.RepositorioVehiculo;
-import persistencia.builder.VehiculoBuilder;
 import persistencia.entidad.VehiculoEntity;
 
 public class RepositorioVehiculoPersistente implements RepositorioVehiculo {

@@ -11,10 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import dominio.Carro;
 import dominio.CeldaParqueo;
-import dominio.Moto;
-import dominio.Vehiculo;
 import dominio.repositorio.RepositorioCelda;
 import persistencia.sistema.SistemaPersistencia;
 import servicio.AdminParqueaderoServicio;

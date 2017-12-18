@@ -47,12 +47,11 @@ public class AdminParqueaderoServicioImpl implements AdminParqueaderoServicio {
 		return repositoriocelda.listarcelda();
 
 	}
-	
 
 	@Override
 	public boolean esMayorAlCilindrajePermitido(int cilindraje) {
 
-		return cilindraje >= MAX_CILINDRAJE;
+		return (cilindraje >= MAX_CILINDRAJE);
 	}
 
 	@Override
@@ -100,26 +99,28 @@ public class AdminParqueaderoServicioImpl implements AdminParqueaderoServicio {
 	public boolean esPermitidoIngresoPorPlaca(String placa) {
 		Calendar now = Calendar.getInstance();
 
-		return ((placa.charAt(0) == 'A')
-				&& ((now.get((Calendar.DAY_OF_WEEK)) != 1) || (now.get((Calendar.DAY_OF_WEEK)) != 2)));
+		if ((placa.charAt(0) == 'A')) {
+
+			return ((now.get((Calendar.DAY_OF_WEEK)) != 1) && (now.get((Calendar.DAY_OF_WEEK)) != 2));
+		}
+		return true;
+
 	}
 
 	public void ingresarVehiculo(Vehiculo vehiculo) {
 		validarSiElVehiculoPuedeIngresar(vehiculo);
-		
+
 		ingresarVehiculoBd(vehiculo);
-		
+
 	}
-	
+
 	private void validarSiElVehiculoPuedeIngresar(Vehiculo vehiculo) {
 		int capacidadMaxima = CARRO.equals(vehiculo.getTipo()) ? MAX_CARROS : MAX_MOTOS;
-		if (obtenerCantidadCarros() >= capacidadMaxima || vehiculo.getEstado() ||
-				!esPermitidoIngresoPorPlaca((vehiculo.getPlaca()))) {
-			throw  new IllegalArgumentException("no hay acceso de " + vehiculo.getTipo());
+		if (obtenerCantidadCarros() > capacidadMaxima || vehiculo.getEstado()
+				|| !esPermitidoIngresoPorPlaca((vehiculo.getPlaca()))) {
+			throw new IllegalArgumentException("no hay acceso de " + vehiculo.getTipo());
 		}
-	}	
-
-
+	}
 
 	private String ingresarVehiculoBd(Vehiculo vehiculo) {
 		String mensaje;
@@ -154,7 +155,7 @@ public class AdminParqueaderoServicioImpl implements AdminParqueaderoServicio {
 	public int precioTotalPorVehiculo(CeldaParqueo celda) {
 		int precioTotal = 0;
 		if (celda.getVehiculo().getTipo().equals(MOTO)
-				&& esMayorAlCilindrajePermitido(((Moto) celda.getVehiculo()).getCilindraje()) ) {
+				&& esMayorAlCilindrajePermitido(((Moto) celda.getVehiculo()).getCilindraje())) {
 			precioTotal = calcularValorTotalPorTiempo(celda) + 2000;
 		} else {
 			precioTotal = calcularValorTotalPorTiempo(celda);
@@ -165,8 +166,8 @@ public class AdminParqueaderoServicioImpl implements AdminParqueaderoServicio {
 	@Override
 	public int obtenerCantidadCarros() {
 		List<VehiculoEntity> vehiculosAValidar = listarVehiculos();
-		int contadorCarros = 0;	
-		
+		int contadorCarros = 0;
+
 		for (VehiculoEntity vehiculo : vehiculosAValidar) {
 			if (vehiculo.getTipo().equals(CARRO)) {
 				contadorCarros += 1;
@@ -199,7 +200,5 @@ public class AdminParqueaderoServicioImpl implements AdminParqueaderoServicio {
 		}
 		return valorTotal;
 	}
-	
-
 
 }

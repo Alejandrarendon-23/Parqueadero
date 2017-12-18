@@ -52,10 +52,15 @@ public class AdminParqueaderoTest {
 	public void ingresarMotoTest() {
 		Vehiculo moto = new Moto("moto", "FBW23D", false, 1000);
 		AdminParqueaderoServicio vigilante = new AdminParqueaderoServicioImpl();
-		vigilante.ingresarVehiculo(moto);
+		try {
+			vigilante.ingresarVehiculo(moto);
+		}catch(Exception e) {
+			fail();
+		}
+		
 
 		assertEquals("FBW23D", repositoriovehiculo.obtenerPorPlaca("FBW23D").getPlaca());
-		assertNotNull(moto);
+		
 
 	}
 
@@ -127,7 +132,12 @@ public class AdminParqueaderoTest {
 	public void retiroCarroTest() {
 		Vehiculo carro = new Carro("carro", "FBW235", false);
 		AdminParqueaderoServicio vigilante = new AdminParqueaderoServicioImpl();
-		vigilante.ingresarVehiculo(carro);
+		try {
+			vigilante.ingresarVehiculo(carro);
+		}catch(Exception e) {
+			fail();
+		}
+		
 		VehiculoEntity vehiculoIngresado = repositoriovehiculo.obtenerPorPlaca("FBW235");
 		vigilante.retirarVehiculo(VehiculoBuilder.convertirADominio(vehiculoIngresado));
 		
@@ -139,7 +149,12 @@ public class AdminParqueaderoTest {
 	public void retiroMotoTest() {
 		Vehiculo moto = new Moto("moto", "FBW23K", false, 100);
 		AdminParqueaderoServicio vigilante = new AdminParqueaderoServicioImpl();
-		vigilante.ingresarVehiculo(moto);
+		try {
+			vigilante.ingresarVehiculo(moto);
+		}catch(Exception e) {
+			fail();
+		}
+		
 		VehiculoEntity vehiculoIngresado = repositoriovehiculo.obtenerPorPlaca("FBW23K");
 		vigilante.retirarVehiculo(VehiculoBuilder.convertirADominio(vehiculoIngresado));
 		

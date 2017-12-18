@@ -37,14 +37,6 @@ public class VehiculoController {
 	public ResponseBuilder ingreso(@RequestParam(value = "placa", required = true) String placa,
 			@RequestParam(value = "tipo", required = true) String tipo,
 			@RequestParam(value = "cilindraje", required = false, defaultValue = "0") int cilindraje) {
-//		Vehiculo vehiculo = null;
-//		if (tipo.equals("carro")) {
-//
-//			vehiculo = new Carro(tipo, placa, false);
-//		} else if (tipo.equals("moto")) {
-//			vehiculo = new Moto(tipo, placa, false, cilindraje);
-//
-//		}
 
 		return Response.status(200);
 

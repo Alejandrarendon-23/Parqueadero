@@ -1,6 +1,5 @@
 package servicio;
 
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 
@@ -53,11 +52,7 @@ public class AdminParqueaderoServicioImpl implements AdminParqueaderoServicio {
 	@Override
 	public boolean esMayorAlCilindrajePermitido(int cilindraje) {
 
-		if (cilindraje > MAX_CILINDRAJE) {
-
-			return true;
-		}
-		return false;
+		return cilindraje >= MAX_CILINDRAJE;
 	}
 
 	@Override
@@ -104,12 +99,9 @@ public class AdminParqueaderoServicioImpl implements AdminParqueaderoServicio {
 	@Override
 	public boolean esPermitidoIngresoPorPlaca(String placa) {
 		Calendar now = Calendar.getInstance();
-		if ((placa.charAt(0) == 'A')
-				&& ((now.get((Calendar.DAY_OF_WEEK)) != 1) || (now.get((Calendar.DAY_OF_WEEK)) != 2))) {
-			System.err.println("No está autorizado para ingresar al parqueadero");
-			return false;
-		}
-		return true;
+
+		return ((placa.charAt(0) == 'A')
+				&& ((now.get((Calendar.DAY_OF_WEEK)) != 1) || (now.get((Calendar.DAY_OF_WEEK)) != 2)));
 	}
 
 	public void ingresarVehiculo(Vehiculo vehiculo) {

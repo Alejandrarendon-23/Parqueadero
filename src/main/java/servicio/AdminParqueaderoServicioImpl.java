@@ -1,5 +1,6 @@
 package servicio;
 
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 
@@ -18,6 +19,8 @@ import persistencia.sistema.SistemaPersistencia;
 @Component
 public class AdminParqueaderoServicioImpl implements AdminParqueaderoServicio {
 
+	private static final String MOTO = "moto";
+	private static final String CARRO = "carro";
 	private static final int MAX_CARROS = 20;
 	private static final int MAX_MOTOS = 10;
 	private static final int VALOR_HORA_CARRO = 1000;
@@ -39,17 +42,18 @@ public class AdminParqueaderoServicioImpl implements AdminParqueaderoServicio {
 		return repositoriovehiculo.listarvehiculos();
 
 	}
+
 	@Override
 	public List<CeldaEntity> listarCeldas() {
 		return repositoriocelda.listarcelda();
 
 	}
-
+	
 
 	@Override
 	public boolean esMayorAlCilindrajePermitido(int cilindraje) {
 
-		if(cilindraje > MAX_CILINDRAJE) {
+		if (cilindraje > MAX_CILINDRAJE) {
 
 			return true;
 		}
@@ -64,10 +68,10 @@ public class AdminParqueaderoServicioImpl implements AdminParqueaderoServicio {
 		int numDias = 0;
 		int numHorasRestantes = 0;
 		int numHoras = (int) (fechaDiferencia / (1000 * 60 * 60));
-		int minutos = (int) ( (fechaDiferencia % (1000 * 60 * 60)) / (1000 * 60));
+		int minutos = (int) ((fechaDiferencia % (1000 * 60 * 60)) / (1000 * 60));
 		int valorHora = 0;
 		int valorDia = 0;
-		if (celda.getVehiculo().getTipo().equals("carro")) {
+		if (celda.getVehiculo().getTipo().equals(CARRO)) {
 			valorDia = VALOR_DIA_CARRO;
 			valorHora = VALOR_HORA_CARRO;
 		} else {
@@ -75,8 +79,8 @@ public class AdminParqueaderoServicioImpl implements AdminParqueaderoServicio {
 			valorHora = VALOR_HORA_MOTO;
 		}
 		int suma = 0;
-		if (minutos >0) {
-			suma += valorHora;	
+		if (minutos > 0) {
+			suma += valorHora;
 		}
 		if (numHoras < 9) {
 			suma += numHoras * valorHora;
@@ -108,43 +112,43 @@ public class AdminParqueaderoServicioImpl implements AdminParqueaderoServicio {
 		return true;
 	}
 
-	public String ingresarVehiculo(Vehiculo vehiculo) {
-		String mensaje = "No se permite su ingreso al parqueadero";
-		if (vehiculo.getTipo().equals("carro") && esPermitidoIngresoPorPlaca((vehiculo.getPlaca())) == true
-				&& obtenerCantidadCarros() <= MAX_CARROS && vehiculo.getEstado() == false) {
-			vehiculo.setEstado(true);
-
-			repositoriovehiculo.agregar(VehiculoBuilder.convertirAEntity(vehiculo));
-			CeldaEntity celdaEntity = new CeldaEntity();
-			VehiculoEntity vehiculoEntity = repositoriovehiculo.obtenerPorPlaca(vehiculo.getPlaca());
-
-			celdaEntity.setHoraIngreso(Calendar.getInstance());
-			celdaEntity.setVehiculo(vehiculoEntity);
-
-			repositoriocelda.agregarCelda(celdaEntity);
-			mensaje = ("Está autorizado para ingresar al parqueadero");
-
-		} else if (vehiculo.getTipo().equals("moto") && esPermitidoIngresoPorPlaca((vehiculo.getPlaca())) == true
-				&& obtenerCantidadMotos() <= MAX_MOTOS && vehiculo.getEstado() == false) {
-			vehiculo.setEstado(true);
-
-			repositoriovehiculo.agregar(VehiculoBuilder.convertirAEntity(vehiculo));
-			CeldaEntity celdaEntity = new CeldaEntity();
-			VehiculoEntity vehiculoEntity = repositoriovehiculo.obtenerPorPlaca(vehiculo.getPlaca());
-
-			celdaEntity.setHoraIngreso(Calendar.getInstance());
-			celdaEntity.setVehiculo(vehiculoEntity);
-
-			repositoriocelda.agregarCelda(celdaEntity);
-			mensaje = ("Está autorizado para ingresar al parqueadero");
+	public void ingresarVehiculo(Vehiculo vehiculo) {
+		validarSiElVehiculoPuedeIngresar(vehiculo);
+		
+		ingresarVehiculoBd(vehiculo);
+		
+	}
+	
+	private void validarSiElVehiculoPuedeIngresar(Vehiculo vehiculo) {
+		int capacidadMaxima = CARRO.equals(vehiculo.getTipo()) ? MAX_CARROS : MAX_MOTOS;
+		if (obtenerCantidadCarros() >= capacidadMaxima || vehiculo.getEstado() ||
+				!esPermitidoIngresoPorPlaca((vehiculo.getPlaca()))) {
+			throw  new IllegalArgumentException("no hay acceso de " + vehiculo.getTipo());
 		}
+	}	
+
+
+
+	private String ingresarVehiculoBd(Vehiculo vehiculo) {
+		String mensaje;
+		vehiculo.setEstado(true);
+
+		repositoriovehiculo.agregar(VehiculoBuilder.convertirAEntity(vehiculo));
+		CeldaEntity celdaEntity = new CeldaEntity();
+		VehiculoEntity vehiculoEntity = repositoriovehiculo.obtenerPorPlaca(vehiculo.getPlaca());
+
+		celdaEntity.setHoraIngreso(Calendar.getInstance());
+		celdaEntity.setVehiculo(vehiculoEntity);
+
+		repositoriocelda.agregarCelda(celdaEntity);
+		mensaje = ("Está autorizado para ingresar al parqueadero");
 		return mensaje;
 	}
 
 	@Override
 	public String retirarVehiculo(Vehiculo vehiculo) {
 		String mensaje = "No es posible retirar el vehiculo";
-		if (vehiculo.getEstado() == true) {
+		if (vehiculo.getEstado()) {
 			vehiculo.setEstado(false);
 
 			repositoriovehiculo.actualizarVehiculo(VehiculoBuilder.convertirAEntity(vehiculo));
@@ -157,8 +161,8 @@ public class AdminParqueaderoServicioImpl implements AdminParqueaderoServicio {
 	@Override
 	public int precioTotalPorVehiculo(CeldaParqueo celda) {
 		int precioTotal = 0;
-		if (celda.getVehiculo().getTipo().equals("moto")
-				&& esMayorAlCilindrajePermitido(((Moto) celda.getVehiculo()).getCilindraje()) == true) {
+		if (celda.getVehiculo().getTipo().equals(MOTO)
+				&& esMayorAlCilindrajePermitido(((Moto) celda.getVehiculo()).getCilindraje()) ) {
 			precioTotal = calcularValorTotalPorTiempo(celda) + 2000;
 		} else {
 			precioTotal = calcularValorTotalPorTiempo(celda);
@@ -169,9 +173,10 @@ public class AdminParqueaderoServicioImpl implements AdminParqueaderoServicio {
 	@Override
 	public int obtenerCantidadCarros() {
 		List<VehiculoEntity> vehiculosAValidar = listarVehiculos();
-		int contadorCarros = 0;
+		int contadorCarros = 0;	
+		
 		for (VehiculoEntity vehiculo : vehiculosAValidar) {
-			if (vehiculo.getTipo().equals("carro")) {
+			if (vehiculo.getTipo().equals(CARRO)) {
 				contadorCarros += 1;
 
 			}
@@ -185,7 +190,7 @@ public class AdminParqueaderoServicioImpl implements AdminParqueaderoServicio {
 		List<VehiculoEntity> vehiculosAValidar = listarVehiculos();
 		int contadorMotos = 0;
 		for (VehiculoEntity vehiculo : vehiculosAValidar) {
-			if (vehiculo.getTipo().equals("moto")) {
+			if (vehiculo.getTipo().equals(MOTO)) {
 				contadorMotos += 1;
 
 			}
@@ -202,5 +207,7 @@ public class AdminParqueaderoServicioImpl implements AdminParqueaderoServicio {
 		}
 		return valorTotal;
 	}
+	
+
 
 }

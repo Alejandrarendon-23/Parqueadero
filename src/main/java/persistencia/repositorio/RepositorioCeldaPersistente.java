@@ -1,6 +1,5 @@
 package persistencia.repositorio;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -40,11 +39,10 @@ public class RepositorioCeldaPersistente implements RepositorioCelda {
 	}
 	@Override
 	public List<CeldaEntity> listarcelda() {
-		List<CeldaEntity> listaCelda = new ArrayList<>();
 		Query query = entityManager.createNamedQuery(CELDA_FIND_ALL);
-		listaCelda = query.getResultList();
+		
 
-		return listaCelda;
+		return query.getResultList();
 	}
 
 }

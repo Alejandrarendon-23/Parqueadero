@@ -3,6 +3,7 @@ package controlador;
 import java.util.Calendar;
 
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.ResponseBuilder;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -24,6 +25,8 @@ public class VehiculoController {
 
 	@Autowired
 	private AdminParqueaderoServicio vehiculoService;
+	
+	
 	private SistemaPersistencia sistemaPersistencia = new SistemaPersistencia();
 
 	public VehiculoController(AdminParqueaderoServicio vehiculoService) {
@@ -31,19 +34,19 @@ public class VehiculoController {
 	}
 
 	@RequestMapping("/ingreso")
-	public Response ingreso(@RequestParam(value = "placa", required = true) String placa,
+	public ResponseBuilder ingreso(@RequestParam(value = "placa", required = true) String placa,
 			@RequestParam(value = "tipo", required = true) String tipo,
 			@RequestParam(value = "cilindraje", required = false, defaultValue = "0") int cilindraje) {
-		Vehiculo vehiculo = null;
-		if (tipo.equals("carro")) {
+//		Vehiculo vehiculo = null;
+//		if (tipo.equals("carro")) {
+//
+//			vehiculo = new Carro(tipo, placa, false);
+//		} else if (tipo.equals("moto")) {
+//			vehiculo = new Moto(tipo, placa, false, cilindraje);
+//
+//		}
 
-			vehiculo = new Carro(tipo, placa, false);
-		} else if (tipo.equals("moto")) {
-			vehiculo = new Moto(tipo, placa, false, cilindraje);
-
-		}
-
-		return Response.status(200).entity(vehiculoService.ingresarVehiculo(vehiculo)).build();
+		return Response.status(200);
 
 	}
 

@@ -1,6 +1,5 @@
 package persistencia.repositorio;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -25,9 +24,9 @@ public class RepositorioVehiculoPersistente implements RepositorioVehiculo {
 	public VehiculoEntity obtenerPorPlaca(String placa) {
 		Query query = entityManager.createNamedQuery(VEHICULO_FIND_BY_PLACA);
 		query.setParameter("placa", placa);
-		VehiculoEntity vehiculoEntity = (VehiculoEntity) query.getSingleResult();
+		
 
-		return vehiculoEntity;
+		return (VehiculoEntity) query.getSingleResult();
 	}
 
 	@Override
@@ -54,11 +53,11 @@ public class RepositorioVehiculoPersistente implements RepositorioVehiculo {
 
 	@Override
 	public List<VehiculoEntity> listarvehiculos() {
-		List<VehiculoEntity> listaVehiculos = new ArrayList<>();
+		
 		Query query = entityManager.createNamedQuery(VEHICULO_FIND_ALL);
-		listaVehiculos = query.getResultList();
+		
 
-		return listaVehiculos;
+		return query.getResultList();
 	}
 
 }

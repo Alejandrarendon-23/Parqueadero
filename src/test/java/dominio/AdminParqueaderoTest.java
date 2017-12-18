@@ -1,7 +1,9 @@
 package dominio;
 
+import static org.assertj.core.api.Assertions.fail;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.fail;
 
 import java.util.Calendar;
 
@@ -36,11 +38,14 @@ public class AdminParqueaderoTest {
 	public void ingresarCarroTest() {
 		Vehiculo carro = new Carro("carro", "FBW234", false);
 		AdminParqueaderoServicio vigilante = new AdminParqueaderoServicioImpl();
-		vigilante.ingresarVehiculo(carro);
-
+		
+		try {
+			vigilante.ingresarVehiculo(carro);
+		}catch(Exception e) {
+			fail();
+		}
+		
 		assertEquals("FBW234", repositoriovehiculo.obtenerPorPlaca("FBW234").getPlaca());
-		assertNotNull(carro);
-
 	}
 
 	@Test

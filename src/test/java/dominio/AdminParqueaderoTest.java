@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
 import java.util.Calendar;
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -14,6 +15,7 @@ import persistencia.entidad.VehiculoEntity;
 import persistencia.sistema.SistemaPersistencia;
 import servicio.AdminParqueaderoServicio;
 import servicio.AdminParqueaderoServicioImpl;
+import testdatabuilder.VehiculoTestDataBuilder;
 
 public class AdminParqueaderoTest {
 
@@ -36,13 +38,13 @@ public class AdminParqueaderoTest {
 	public void ingresarCarroTest() {
 		Vehiculo carro = new Carro("carro", "FBW234", false);
 		AdminParqueaderoServicio vigilante = new AdminParqueaderoServicioImpl();
-		
+
 		try {
 			vigilante.ingresarVehiculo(carro);
-		}catch(Exception e) {
+		} catch (Exception e) {
 			fail();
 		}
-		
+
 		assertEquals("FBW234", repositoriovehiculo.obtenerPorPlaca("FBW234").getPlaca());
 	}
 
@@ -52,13 +54,11 @@ public class AdminParqueaderoTest {
 		AdminParqueaderoServicio vigilante = new AdminParqueaderoServicioImpl();
 		try {
 			vigilante.ingresarVehiculo(moto);
-		}catch(Exception e) {
+		} catch (Exception e) {
 			fail();
 		}
-		
 
 		assertEquals("FBW23D", repositoriovehiculo.obtenerPorPlaca("FBW23D").getPlaca());
-		
 
 	}
 
@@ -132,32 +132,71 @@ public class AdminParqueaderoTest {
 		AdminParqueaderoServicio vigilante = new AdminParqueaderoServicioImpl();
 		try {
 			vigilante.ingresarVehiculo(carro);
-		}catch(Exception e) {
+		} catch (Exception e) {
 			fail();
 		}
-		
+
 		VehiculoEntity vehiculoIngresado = repositoriovehiculo.obtenerPorPlaca("FBW235");
 		vigilante.retirarVehiculo(VehiculoBuilder.convertirADominio(vehiculoIngresado));
-		
-		
+
 		assertEquals("FBW235", repositoriovehiculo.obtenerPorPlaca("FBW235").getPlaca());
 
 	}
+
 	@Test
 	public void retiroMotoTest() {
 		Vehiculo moto = new Moto("moto", "FBW23K", false, 100);
 		AdminParqueaderoServicio vigilante = new AdminParqueaderoServicioImpl();
 		try {
 			vigilante.ingresarVehiculo(moto);
-		}catch(Exception e) {
+		} catch (Exception e) {
 			fail();
 		}
-		
+
 		VehiculoEntity vehiculoIngresado = repositoriovehiculo.obtenerPorPlaca("FBW23K");
 		vigilante.retirarVehiculo(VehiculoBuilder.convertirADominio(vehiculoIngresado));
-		
-		
+
 		assertEquals("FBW23K", repositoriovehiculo.obtenerPorPlaca("FBW23K").getPlaca());
+
+	}
+
+	@Test
+	public void obtenerCantidadCarrosTest() {
+		Vehiculo carro = new Carro("carro", "FBW234", false);
+		Vehiculo carro2 = new Carro("carro", "QWE456", false);
+		AdminParqueaderoServicio vigilante = new AdminParqueaderoServicioImpl();
+
+		try {
+			vigilante.ingresarVehiculo(carro);
+			vigilante.ingresarVehiculo(carro2);
+
+		} catch (Exception e) {
+			fail();
+			
+		}
+
+		int listaVehiculos = vigilante.obtenerCantidadCarros();
+		assertEquals(2, listaVehiculos);
+
+	}
+
+	@Test
+	public void obtenerCantidadMotosTest() {
+		Vehiculo moto = new Moto("moto", "FBW23K", false,100);
+		Vehiculo moto2 = new Moto("moto", "QWE45L", false,200);
+		AdminParqueaderoServicio vigilante = new AdminParqueaderoServicioImpl();
+
+		try {
+			vigilante.ingresarVehiculo(moto);
+			vigilante.ingresarVehiculo(moto2);
+
+		} catch (Exception e) {
+			fail();
+			
+		}
+
+		int listaVehiculos = vigilante.obtenerCantidadMotos();
+		assertEquals(2, listaVehiculos);
 
 	}
 

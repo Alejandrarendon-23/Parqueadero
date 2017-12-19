@@ -59,7 +59,6 @@ public class AdminParqueaderoServicioImpl implements AdminParqueaderoServicio {
 		Calendar fechaIngreso = celda.getHoraIngreso();
 		Calendar fechaSalida = celda.getHoraSalida();
 		long fechaDiferencia = (fechaSalida.getTimeInMillis() - fechaIngreso.getTimeInMillis());
-		int numDias = 0;
 		int numHorasRestantes = 0;
 		int numHoras = (int) (fechaDiferencia / (1000 * 60 * 60));
 		int minutos = (int) ((fechaDiferencia % (1000 * 60 * 60)) / (1000 * 60));
@@ -72,6 +71,12 @@ public class AdminParqueaderoServicioImpl implements AdminParqueaderoServicio {
 			valorDia = VALOR_DIA_MOTO;
 			valorHora = VALOR_HORA_MOTO;
 		}
+
+		return valorTotalPorTiempo(numHorasRestantes, numHoras, minutos, valorHora, valorDia);
+	}
+
+	private int valorTotalPorTiempo(int numHorasRestantes, int numHoras, int minutos, int valorHora, int valorDia) {
+		int numDias = 0;
 		int suma = 0;
 		if (minutos > 0) {
 			suma += valorHora;
@@ -108,8 +113,6 @@ public class AdminParqueaderoServicioImpl implements AdminParqueaderoServicio {
 	}
 
 	public void ingresarVehiculo(Vehiculo vehiculo) {
-
-	
 
 		validarSiElVehiculoPuedeIngresar(vehiculo);
 

@@ -3,6 +3,7 @@ package persistencia.repositorio;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
 import dominio.CeldaParqueo;
@@ -26,9 +27,15 @@ public class RepositorioCeldaPersistente implements RepositorioCelda {
 	public CeldaParqueo obtenerPorCeldaPlaca(String placa) {
 		Query query = entityManager.createNamedQuery(CELDA_FIND_BY_PLACA);
 		query.setParameter("placa", placa);
-		CeldaEntity celdaEntity = (CeldaEntity) query.getSingleResult();
+		CeldaEntity celdaEntity = null;
+		try {
+			celdaEntity = (CeldaEntity) query.getSingleResult();
+		} catch (NoResultException nre) {
+			celdaEntity = null;
 
+		}
 		return CeldaBuilder.convertirADominio(celdaEntity);
+		
 	}
 
 	@Override

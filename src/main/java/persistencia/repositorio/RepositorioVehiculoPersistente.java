@@ -3,6 +3,7 @@ package persistencia.repositorio;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
 import dominio.repositorio.RepositorioVehiculo;
@@ -24,9 +25,14 @@ public class RepositorioVehiculoPersistente implements RepositorioVehiculo {
 	public VehiculoEntity obtenerPorPlaca(String placa) {
 		Query query = entityManager.createNamedQuery(VEHICULO_FIND_BY_PLACA);
 		query.setParameter("placa", placa);
-		
+		VehiculoEntity vehiculoEntity = null;
+		try {
+			vehiculoEntity = (VehiculoEntity) query.getSingleResult();
+		} catch (NoResultException nre) {
+			vehiculoEntity = null;
 
-		return (VehiculoEntity) query.getSingleResult();
+		}
+		return vehiculoEntity;
 	}
 
 	@Override
@@ -41,6 +47,7 @@ public class RepositorioVehiculoPersistente implements RepositorioVehiculo {
 	public void actualizarVehiculo(VehiculoEntity vehiculo) {
 		Query query = entityManager.createNamedQuery(VEHICULO_FIND_BY_PLACA);
 		query.setParameter("placa", vehiculo.getPlaca());
+		
 		VehiculoEntity vehiculoEntity = (VehiculoEntity) query.getSingleResult();
 
 		vehiculoEntity.setEstado(vehiculo.getEstado());
@@ -53,9 +60,8 @@ public class RepositorioVehiculoPersistente implements RepositorioVehiculo {
 
 	@Override
 	public List<VehiculoEntity> listarvehiculos() {
-		
+
 		Query query = entityManager.createNamedQuery(VEHICULO_FIND_ALL);
-		
 
 		return query.getResultList();
 	}

@@ -108,6 +108,9 @@ public class AdminParqueaderoServicioImpl implements AdminParqueaderoServicio {
 	}
 
 	public void ingresarVehiculo(Vehiculo vehiculo) {
+
+	
+
 		validarSiElVehiculoPuedeIngresar(vehiculo);
 
 		ingresarVehiculoBd(vehiculo);

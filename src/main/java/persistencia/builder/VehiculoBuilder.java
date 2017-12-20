@@ -29,13 +29,13 @@ public class VehiculoBuilder {
 		vehiculoEntity.setEstado(vehiculo.getEstado());
 		vehiculoEntity.setTipo(vehiculo.getTipo());
 		vehiculoEntity.setPlaca(vehiculo.getPlaca());
-		
+
 		if (vehiculoEntity.getTipo().equals("moto")) {
 			Moto moto = (Moto) vehiculo;
-			
+
 			vehiculoEntity.setCilindraje(moto.getCilindraje());
-		} 
-			
+		}
+
 		return vehiculoEntity;
 	}
 

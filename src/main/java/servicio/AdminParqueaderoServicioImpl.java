@@ -151,6 +151,7 @@ public class AdminParqueaderoServicioImpl implements AdminParqueaderoServicio {
 			vehiculo.setEstado(false);
 
 			repositoriovehiculo.actualizarVehiculo(VehiculoBuilder.convertirAEntity(vehiculo));
+			
 			mensaje = "retiro exitoso";
 		}
 		return mensaje;
@@ -202,6 +203,8 @@ public class AdminParqueaderoServicioImpl implements AdminParqueaderoServicio {
 	public int cobroTotalPorVehiculo(CeldaParqueo celda) {
 		int valorTotal = 0;
 		if (retirarVehiculo(celda.getVehiculo()).equals("retiro exitoso")) {
+			celda.setHoraSalida(Calendar.getInstance());
+			repositoriocelda.cambiarHoraSalida(celda);
 			valorTotal = precioTotalPorVehiculo(celda);
 		}
 		return valorTotal;

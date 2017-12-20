@@ -34,8 +34,26 @@ public class RepositorioCeldaPersistente implements RepositorioCelda {
 			celdaEntity = null;
 
 		}
-		return CeldaBuilder.convertirADominio(celdaEntity);
-		
+		return CeldaBuilder.convertirADominio(celdaEntity);		
+	}
+	
+	public CeldaEntity obtenerPorCeldaEntityPlaca(String placa) {
+		Query query = entityManager.createNamedQuery(CELDA_FIND_BY_PLACA);
+		query.setParameter("placa", placa);
+		CeldaEntity celdaEntity = null;
+		try {
+			celdaEntity = (CeldaEntity) query.getSingleResult();
+		} catch (NoResultException nre) {
+			celdaEntity = null;
+
+		}
+		return celdaEntity;	
+	}
+	
+	@Override
+	public void cambiarHoraSalida(CeldaParqueo celda) {
+		CeldaEntity celdaEntity = obtenerPorCeldaEntityPlaca(celda.getVehiculo().getPlaca());
+		celdaEntity.setHoraSalida(celda.getHoraSalida());
 	}
 
 	@Override
@@ -51,5 +69,6 @@ public class RepositorioCeldaPersistente implements RepositorioCelda {
 
 		return query.getResultList();
 	}
+	
 
 }

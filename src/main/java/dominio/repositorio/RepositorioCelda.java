@@ -22,5 +22,8 @@ public interface RepositorioCelda {
 	void agregarCelda(CeldaEntity celda);
 
 	List<CeldaEntity> listarcelda();
+	
+	void cambiarHoraSalida(CeldaParqueo celda);
+	
 
 }

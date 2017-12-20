@@ -45,7 +45,6 @@ public class VehiculoController {
 
 		RepositorioCelda repositorioCelda = sistemaPersistencia.obtenerRepositorioCelda();
 		CeldaParqueo celda = repositorioCelda.obtenerPorCeldaPlaca(placa);
-		celda.setHoraSalida(Calendar.getInstance());
 
 		String output = "El valor total a pagar es: " + vehiculoService.cobroTotalPorVehiculo(celda) + " $";
 		return Response.status(200).entity(output).build();

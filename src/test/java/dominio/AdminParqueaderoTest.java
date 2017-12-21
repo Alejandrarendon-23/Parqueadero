@@ -4,7 +4,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
 import java.util.Calendar;
-import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -15,7 +14,6 @@ import persistencia.entidad.VehiculoEntity;
 import persistencia.sistema.SistemaPersistencia;
 import servicio.AdminParqueaderoServicio;
 import servicio.AdminParqueaderoServicioImpl;
-import testdatabuilder.VehiculoTestDataBuilder;
 
 public class AdminParqueaderoTest {
 

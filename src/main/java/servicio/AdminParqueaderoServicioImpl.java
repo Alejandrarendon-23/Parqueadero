@@ -122,8 +122,8 @@ public class AdminParqueaderoServicioImpl implements AdminParqueaderoServicio {
 
 	private void validarSiElVehiculoPuedeIngresar(Vehiculo vehiculo) {
 		int capacidadMaxima = CARRO.equals(vehiculo.getTipo()) ? MAX_CARROS : MAX_MOTOS;
-		if (obtenerCantidadCarros() > capacidadMaxima || vehiculo.getEstado()
-				|| !esPermitidoIngresoPorPlaca((vehiculo.getPlaca()))) {
+		if ((obtenerCantidadCarros() >= capacidadMaxima || obtenerCantidadMotos() >= capacidadMaxima)
+				|| vehiculo.getEstado() || !esPermitidoIngresoPorPlaca((vehiculo.getPlaca()))) {
 			throw new IllegalArgumentException("no hay acceso de " + vehiculo.getTipo());
 		}
 	}
@@ -151,7 +151,7 @@ public class AdminParqueaderoServicioImpl implements AdminParqueaderoServicio {
 			vehiculo.setEstado(false);
 
 			repositoriovehiculo.actualizarVehiculo(VehiculoBuilder.convertirAEntity(vehiculo));
-			
+
 			mensaje = "retiro exitoso";
 		}
 		return mensaje;
